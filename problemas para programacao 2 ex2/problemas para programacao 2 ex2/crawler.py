@@ -50,5 +50,5 @@ def simple_crawler(start_url, max_pages=10):
     for url in visited:
         print(url)
 
-start_url = "https://exemplo.com.br"
+start_url = "https://ufg.br/"
 simple_crawler(start_url, max_pages=5)
