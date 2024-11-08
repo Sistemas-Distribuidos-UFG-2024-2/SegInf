@@ -24,6 +24,6 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(3000, () => {
-  console.log("Monitoring server is running on http://localhost:3000");
+server.listen(3012, () => {
+  console.log("Monitoring server is running on http://localhost:3012");
 });
