@@ -48,11 +48,9 @@ Servidor Honeypot
 php honeypot-server.php
 
 Servidor de Monitoramento
-cd ../monitor
 node monitor-server.js
 
 Cliente de Testes
-cd ../test-client
 python ddos-client.py
 
 6 Abra o monitor de logs em seu navegador no endereço gerado pelo Codespaces, em http://localhost:3000 ou em um URL designado pelo Codespaces, 
