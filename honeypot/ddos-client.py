@@ -26,7 +26,7 @@ def start_attack(target_ip, target_port, message, num_threads=100):
 
 # Configuracoes de ataque
 target_ip = "127.0.0.1"  # IP do honeypot
-target_port = 8080  # Porta do honeypot
+target_port = 8081  # Porta do honeypot
 message = "GET / HTTP/1.1\r\nHost: localhost\r\n\r\n"
 
 # Iniciar ataque
