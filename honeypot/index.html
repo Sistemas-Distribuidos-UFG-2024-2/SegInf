@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Honeypot Monitor</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f4f4;
+        padding: 20px;
+      }
+      h1 {
+        color: #333;
+      }
+      #logs {
+        white-space: pre-wrap;
+        background: #333;
+        color: white;
+        padding: 10px;
+        height: 400px;
+        overflow-y: scroll;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Honeypot Monitor</h1>
+    <div id="logs"></div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io();
+
+      socket.on("monitorUpdate", (data) => {
+        const logDiv = document.getElementById("logs");
+        logDiv.textContent += data + "\n";
+        logDiv.scrollTop = logDiv.scrollHeight;
+      });
+    </script>
+  </body>
+</html>
