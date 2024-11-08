@@ -46,7 +46,7 @@ $server = \Ratchet\Server\IoServer::factory(
             new HoneypotServer()
         )
     ),
-    8080
+    8081
 );
 
 $server->run();
