@@ -63,12 +63,9 @@
 
       // Processa os logs de ataques
       attackLogs.forEach((log) => {
-        // Filtra apenas mensagens de "Connection closed"
         if (log.message.includes("Connection closed:")) {
           const messageParts = log.message.split('::ffff:')[1];  // Extrai IP e porta
           const [ip, port] = messageParts.split(':'); // Divide IP e Porta
-
-          // Adiciona ao log como "Blocked IP"
           if (ip && port) {
             const timestamp = `[${new Date().toLocaleTimeString()}] `;
             addLog(`${timestamp}Blocked IP: ${ip} - Port: ${port}`);
