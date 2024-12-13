@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard de Monitoramento</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+    .metrics {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px 0;
+    }
+    .metric {
+      background: #fff;
+      padding: 20px;
+      text-align: center;
+      border-radius: 5px;
+    }
+    #logs {
+      background: #000;
+      color: #0f0;
+      padding: 15px;
+      height: 300px;
+      overflow-y: scroll;
+      white-space: pre-wrap; /* Garante que o texto seja exibido com quebras de linha */
+      font-family: monospace; /* Melhora a leitura de logs */
+    }
+  </style>
+</head>
+<body>
+  <h1>Dashboard de Monitoramento</h1>
+
+  <div class="metrics">
+    <div class="metric">
+      <h2 id="active-connections">0</h2>
+      <p>Conexões Ativas</p>
+    </div>
+    <div class="metric">
+      <h2 id="total-requests">0</h2>
+      <p>Requests Totais</p>
+    </div>
+  </div>
+
+  <div id="logs"></div>
+
+  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+  <script>
+    const logsDiv = document.getElementById("logs");
+    const socket = io("https://scaling-tribble-x4wgwvggj55f9pgx-3012.app.github.dev");
+
+    socket.on("monitorUpdate", (data) => {
+      const { activeConnections, totalRequests, message, attackLogs } = data;
+      document.getElementById("active-connections").textContent = activeConnections;
+      document.getElementById("total-requests").textContent = totalRequests;
+
+      // Exibe a mensagem principal
+      addLog(message);
+
+      // Processa os logs de ataques
+      attackLogs.forEach((log) => {
+        // Filtra apenas mensagens de "Connection closed"
+        if (log.message.includes("Connection closed:")) {
+          const messageParts = log.message.split('::ffff:')[1];  // Extrai IP e porta
+          const [ip, port] = messageParts.split(':'); // Divide IP e Porta
+
+          // Adiciona ao log como "Blocked IP"
+          if (ip && port) {
+            const timestamp = `[${new Date().toLocaleTimeString()}] `;
+            addLog(`${timestamp}Blocked IP: ${ip} - Port: ${port}`);
+          }
+        }
+      });
+    });
+
+    function addLog(message) {
+      const timestamp = `[${new Date().toLocaleTimeString()}] `;
+      logsDiv.innerHTML += `${timestamp}${message}\n`;
+
+      // Verifica se a barra de rolagem estava no fundo antes de atualizar
+      const shouldScrollToBottom = logsDiv.scrollHeight - logsDiv.scrollTop === logsDiv.clientHeight;
+
+      if (logsDiv.childNodes.length > 100) {
+        logsDiv.removeChild(logsDiv.firstChild);
+      }
+
+      // Se estava no fundo, mantém a rolagem lá
+      if (shouldScrollToBottom) {
+        logsDiv.scrollTop = logsDiv.scrollHeight;
+      }
+    }
+  </script>
+</body>
+</html>
