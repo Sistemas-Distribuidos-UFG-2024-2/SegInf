@@ -4,9 +4,9 @@
 
 🔹 Desenvolvedores:
 
-Samuel Santos Machado
+Matheus Pamplona Oliveira - 201900600
 
-Matheus Pamplona Oliveira
+Samuel Santos Machado - 201705643
 
 🚀 Visão Geral
 
@@ -30,24 +30,29 @@ Frontend Dashboard: Interface visual para exibir métricas e logs das conexões 
 1. Honeypot
 
 Captura as conexões maliciosas e envia os dados para o servidor central.
+
 Armazena IPs, portas e logs das conexões detectadas.
 
 2. Servidor de Monitoramento
 
 Centraliza e processa os dados enviados pelos honeypots.
+
 Envia as métricas e logs em tempo real para o frontend e os servidores de failover.
 
 3. NGINX Load Balancer
 
 Distribui automaticamente as conexões entre os honeypots e os servidores de monitoramento.
+
 Garante alta disponibilidade e performance do sistema.
 
 4. Dashboard (Frontend)
+
 Interface visual que apresenta as métricas em tempo real, como conexões ativas, requisições totais e logs dos ataques detectados.
 
 📦 Estrutura do Projeto
 
 /
+
 ├── honeypot_server.js         # Honeypot responsável por capturar conexões.
 
 ├── monitor_server.js          # Servidor central de monitoramento.
