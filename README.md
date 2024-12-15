@@ -41,10 +41,17 @@ Interface visual que apresenta as métricas em tempo real, como conexões ativas
 
 /
 ├── honeypot_server.js         # Honeypot responsável por capturar conexões.
+
 ├── monitor_server.js          # Servidor central de monitoramento.
+
 ├── dashboard.html             # Interface visual do painel.
+
 ├── config/                    # Configurações e arquivos de ambiente.
+
 ├── nginx.conf                 # Configuração do balanceador NGINX.
+
 ├── README.md                  # Documentação do projeto.
+
 ├── ddos_simulator.py          # Nosso atacantes  do servidor.
+
 └── package.json               # Dependências e scripts do projeto.
